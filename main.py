@@ -24,6 +24,9 @@ class Candidato:
     def get_votos(self):
         return len(self.votos)
 
+    def cont_votos(self):
+        print(f'{self.get_nome} conseguiu {self.get_votos} votos, {self.votos}')
+
 
 class Eleitor:
 
@@ -34,8 +37,8 @@ class Eleitor:
     def get_cpf(self):
         return self.__cpf
 
-    def votar(self, numero_candidato=0):
-        if numero_candidato != 0:
+    def votar(self, numero_candidato):
+        if numero_candidato in [x.get_numero for x in lista_candidatos]:
             for x in lista_candidatos:
                 if x.get_numero == numero_candidato:
                     if self.get_cpf not in x.votos:
@@ -60,11 +63,15 @@ lista_candidatos.append(c3)
 e1 = Eleitor('Zezin', 12345667890)
 e2 = Eleitor('Zezao', 12345667895)
 e3 = Eleitor('Zefinha', 67854312609)
+e4 = Eleitor('Gabriel', 381278427893578941)
+e5 = Eleitor('Fonso', 572893407857890)
 
 e1.votar(c1.get_numero)
 e2.votar(c2.get_numero)
-e3.votar()
+e3.votar(345)
+e4.votar(c1.get_numero)
+e5.votar(65123)
 
 for x in lista_candidatos:
-    print(f'{x.get_nome} conseguiu {x.get_votos} votos, {x.votos}')
+    x.cont_votos()
 print(f'Houveram {votos_nulos} votos nulos')
